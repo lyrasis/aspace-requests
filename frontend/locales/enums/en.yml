@@ -1,0 +1,14 @@
+# src: common/locales/enums/en.yml
+en:
+  enumerations:
+    event_event_type:
+      request: Request
+    event_outcome:
+      cancelled: Cancelled
+      fulfilled: Fulfilled
+      pending: Pending
+    linked_agent_event_roles:
+      requester: Requester
+    linked_event_archival_record_roles:
+      context: Context
+      requested: Requested
