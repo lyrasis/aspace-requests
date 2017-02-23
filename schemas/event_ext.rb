@@ -1,8 +1,8 @@
 # src: common/schemas/event.rb
-# added (no ui): "reference_identifier" => {"type" => "string"},
+# added (no ui): "refid" => {"type" => "string"},
 # added: {"type" => "JSONModel(:top_container) uri"}
 {
-  "reference_identifier" => {"type" => "string"},
+  "refid" => {"type" => "string"},
   "linked_records" => {
     "type" => "array",
     "ifmissing" => "error",

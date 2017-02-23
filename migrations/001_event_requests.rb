@@ -6,7 +6,7 @@ Sequel.migration do
   up do
     # add reference identifier field to event
     alter_table(:event) do
-      add_column(:reference_identifier, String)
+      add_column(:refid, String)
     end
 
     # add top container foreign key to event relationships table
