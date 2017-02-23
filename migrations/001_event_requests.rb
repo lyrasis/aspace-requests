@@ -4,9 +4,14 @@ require 'db/migrations/utils'
 Sequel.migration do
 
   up do
+    # add reference identifier field to event
+    alter_table(:event) do
+      add_column(:reference_identifier, String)
+    end
+
     # add top container foreign key to event relationships table
     alter_table(:event_link_rlshp) do
-      add_column(:top_container_id, :integer)
+      add_column(:top_container_id, Integer)
       add_foreign_key([:top_container_id], :top_container, key: :id)
     end
 
