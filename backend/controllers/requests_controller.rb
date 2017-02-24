@@ -23,20 +23,23 @@ class ArchivesSpaceService < Sinatra::Base
   end
 
   Endpoint.delete('/plugins/aspace_requests/repositories/:repo_id/requests/:id')
-    .description("Delete a request Event")
+    .description("Cancel a request Event")
     .params(["refid", String, :refid],
             ["id", Integer, :id],
             ["repo_id", :repo_id])
     .permissions([])
-    .returns([200, "(:OK)"]) \
+    .returns([200, "(:event)"]) \
   do
     refid = params[:refid]
     event = Event.find_by_refid(refid)
     raise NotFoundException.new("Request wasn't found with refid: #{refid}") unless event
 
-    requested = Event.to_jsonmodel(event)["event_type"] == "request"
+    obj       = Event.to_jsonmodel(event)
+    requested = obj["event_type"] == "request"
     raise BadParamsException.new("Not a valid request event for refid: #{refid}") unless requested
-    handle_delete(Event, params[:id])
+    obj["outcome"] = "cancelled"
+    event.update_from_json(JSONModel(:event).from_hash(obj.to_hash))
+    json_response(Event.to_jsonmodel(event))
   end
 
 end
