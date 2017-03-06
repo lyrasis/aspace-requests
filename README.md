@@ -19,6 +19,7 @@ functionality.
 - Add form to cancel request (as part of lookup)?
 - Actually add that report ...
 - Create system request user (so config handled transparently)
+- Privacy option (scheduled anonymization or purge of request events not "pending")
 
 ## EXAMPLES
 
