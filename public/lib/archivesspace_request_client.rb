@@ -14,7 +14,7 @@ ArchivesSpacePublic::Application.config.after_initialize do
     private
 
     def do_delete(path, params_string = nil)
-      request = Net::HTTP::Delete.new(build_url(path))
+      request      = Net::HTTP::Delete.new(build_url(path))
       request.body = params_string if params_string
       do_parse_json_request request
     end
