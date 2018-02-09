@@ -2,6 +2,8 @@ ArchivesSpacePublic::Application.config.after_initialize do
   RequestsController
   class RequestsController < ApplicationController
 
+    include PrefixHelper
+
     # cancel a request by refid
     def cancel_request
       path   = backend_cancel_path(cancel_params[:uri])
@@ -50,12 +52,12 @@ ArchivesSpacePublic::Application.config.after_initialize do
     def backend_cancel_path(event_uri)
       repo_id = event_uri.split("/")[2]
       id      = event_uri.split("/")[-1]
-      "/plugins/aspace_requests/repositories/#{repo_id}/requests/#{id}"
+      app_prefix("/plugins/aspace_requests/repositories/#{repo_id}/requests/#{id}")
     end
 
     def backend_request_path(request_uri)
       repo_id = request_uri.split("/")[2]
-      "/plugins/aspace_requests/repositories/#{repo_id}/requests"
+      app_prefix("/plugins/aspace_requests/repositories/#{repo_id}/requests")
     end
 
     def cancel_link(uri, refid, request_uri)
