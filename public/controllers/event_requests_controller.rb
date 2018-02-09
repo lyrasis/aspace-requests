@@ -72,7 +72,7 @@ class RequestsController < ApplicationController
   end
 
   def get_request_client
-    ArchivesSpaceClient.new(
+    ArchivesSpaceRequestClient.new(
       username: AppConfig[:request_username],
       password: AppConfig[:request_user_secret],
     )

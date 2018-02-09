@@ -1,7 +1,7 @@
 Plugins::extend_aspace_routes(File.join(File.dirname(__FILE__), "routes.rb"))
 
 # TODO: add to plugin "services/archives_space_client"? Not here anywway ...
-class ArchivesSpaceClient
+class ArchivesSpaceRequestClient
 
   # TODO: add system request user, for now use an existing user
   def cancel_request(path, params_string)
