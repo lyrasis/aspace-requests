@@ -9,12 +9,12 @@ Implements (currently by overriding) public interface requests functionality.
 - The requester is given a chance to cancel the request (via a link).
 - An agent record is created for the requester with email for correspondence.
 - Requests can be searched for, viewed and processed by staff.
-- A requests report is available to see requests within a date range (TODO).
 - No emails =)
 
 ## TODO
 
 - Add lookup request in public ui by reference id?
+- Add requests report to summarize requests scoped by date range.
 - Privacy option (scheduled anonymization or purge of request events not "pending")
 
 ## Setup
@@ -22,6 +22,11 @@ Implements (currently by overriding) public interface requests functionality.
 ```ruby
 AppConfig[:plugins] << "aspace-requests"
 AppConfig[:pui_page_actions_request] = true
+
+# optional: specify a regex to validate the requester email address
+# i.e. if the email address matches the pattern the request is allowed.
+# this is a spam mitigation strategy only. a simple example:
+AppConfig[:requester_email_validator] = /\A([\w+\-].?)+@archive.somewhere.edu$/i
 ```
 
 ## EXAMPLES

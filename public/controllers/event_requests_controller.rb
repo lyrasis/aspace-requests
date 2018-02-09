@@ -22,9 +22,16 @@ ArchivesSpacePublic::Application.config.after_initialize do
     def make_request
       @request = RequestItem.new(params)
       errs = @request.validate
+
+      # let's try and avoid spam
       if params.fetch("comment") and !params["comment"].empty?
-        errs << I18n.t('request.failed')
+        errs << I18n.t('request.comment_not_appreciated')
       end
+
+      if @request.user_email !~ AppConfig[:requester_email_validator]
+        errs << I18n.t('request.email_invalid')
+      end
+
       if errs.blank?
         path   = backend_request_path(@request.request_uri)
         client = get_request_client # logs in the request user
