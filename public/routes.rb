@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
-  get 'cancel_request' => 'requests#cancel_request', as: "cancel_request"
+  scope AppConfig[:public_proxy_prefix] do
+    get  'cancel_request' => 'requests#cancel_request'
+  end
 
 end
