@@ -1,7 +1,6 @@
 # aspace-requests
 
-Adds a "request" type to Events and implements public interface requests
-functionality.
+Implements (currently by overriding) public interface requests functionality.
 
 ## Summary
 
@@ -17,6 +16,13 @@ functionality.
 
 - Add lookup request in public ui by reference id?
 - Privacy option (scheduled anonymization or purge of request events not "pending")
+
+## Setup
+
+```ruby
+AppConfig[:plugins] << "aspace-requests"
+AppConfig[:pui_page_actions_request] = true
+```
 
 ## EXAMPLES
 
