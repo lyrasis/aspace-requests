@@ -3,7 +3,7 @@ ArchivesSpaceService.loaded_hook do
   Log.info "\n\n\n~~~ ASPACE REQUESTS PLUGIN ENABLED ~~~\n\n\n"
 
   unless AppConfig.has_key? :request_user_secret
-    AppConfig[:request_user_secret] = SecureRandom.hex
+    raise "Set `AppConfig[:request_user_secret] = 'SOMETHING_SECRET'` in config.rb"
   end
 
   ArchivesSpaceService.create_hidden_system_user(

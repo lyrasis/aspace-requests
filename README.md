@@ -21,6 +21,7 @@ Implements (currently by overriding) public interface requests functionality.
 
 ```ruby
 AppConfig[:plugins] << "aspace-requests"
+AppConfig[:request_user_secret] = "SOMETHING_SECRET"
 AppConfig[:pui_page_actions_request] = true
 
 # optional: specify a regex to validate the requester email address
