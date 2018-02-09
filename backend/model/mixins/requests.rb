@@ -9,30 +9,27 @@ module Requests
     def create_request(request)
       # TODO parse date
       event = {
-        "refid" => generate_refid,
+        "refid"        => generate_refid,
         "event_type"   => "request",
         "outcome"      => "pending",
         "outcome_note" => request["note"],
         "date" => {
-          "date_type" => "single",
-          "label"     => "usage",
-          "begin"     => request["date"]
+          "date_type"  => "single",
+          "label"      => "usage",
+          "begin"      => request["date"]
         },
-        "linked_records" => [
-          {
-            "role" => "context",
-            "ref"  => request["request_uri"]
-          },
-          {
-            "role" => "requested",
-            "ref"  => request["top_container_url"].first
-          }
-        ],
         "linked_agents" => [{
           "role" => "requester",
           "ref"  => request["requester_uri"]
         }]
       }
+      linked_records = [{ "role" => "context", "ref"  => request["request_uri"] }]
+      if request["top_container_url"]
+        request["top_container_url"].each do |tc_url|
+          linked_records << { "role" => "requested", "ref" => tc_url }
+        end
+      end
+      event["linked_records"] = linked_records
 
       Event.create_from_json(JSONModel(:event).from_hash(event), :system_generated => true)
     end
