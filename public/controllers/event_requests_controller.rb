@@ -20,6 +20,9 @@ ArchivesSpacePublic::Application.config.after_initialize do
     def make_request
       @request = RequestItem.new(params)
       errs = @request.validate
+      if params.fetch("comment") and !params["comment"].empty?
+        errs << I18n.t('request.failed')
+      end
       if errs.blank?
         path   = backend_request_path(@request.request_uri)
         client = get_request_client # logs in the request user
@@ -33,7 +36,6 @@ ArchivesSpacePublic::Application.config.after_initialize do
           )
           redirect_to params.fetch('base_url', request[:request_uri])
         else
-          # TODO cleanup
           flash[:error] = I18n.t('request.failed')
           redirect_back(fallback_location: request[:request_uri]) and return
         end
