@@ -69,6 +69,6 @@ curl -H "X-ArchivesSpace-Session: $TOKEN" \
 
 ## Compatibility
 
-- v1.5.?
+- v2.3.0
 
 ---
