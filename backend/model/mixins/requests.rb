@@ -40,14 +40,14 @@ module Requests
       agent = JSONModel(:agent_person).from_hash(
         :publish => false,
         :names => [{
-          :primary_name => name,
-          :source => 'local',
-          :rules => 'local',
-          :name_order => 'direct',
+          :primary_name            => name,
+          :source                  => 'local',
+          :rules                   => 'local',
+          :name_order              => 'direct',
           :sort_name_auto_generate => true
         }],
         :agent_contacts => [{
-          :name => name,
+          :name  => name,
           :email => email,
         }]
       )
