@@ -7,7 +7,7 @@ functionality.
 
 - Handle requests for materials as event records within ArchivesSpace.
 - Upon creating a request the requester is given a reference id.
-- The requester is given a chance to cancel the request (via link).
+- The requester is given a chance to cancel the request (via a link).
 - An agent record is created for the requester with email for correspondence.
 - Requests can be searched for, viewed and processed by staff.
 - A requests report is available to see requests within a date range (TODO).
@@ -16,9 +16,6 @@ functionality.
 ## TODO
 
 - Add lookup request in public ui by reference id?
-- Add form to cancel request (as part of lookup)?
-- Actually add that report ...
-- Create system request user (so config handled transparently)
 - Privacy option (scheduled anonymization or purge of request events not "pending")
 
 ## EXAMPLES
