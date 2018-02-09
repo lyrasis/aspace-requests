@@ -3,13 +3,11 @@ class ArchivesSpaceService < Sinatra::Base
   # Add dedicated request endpoints so we don't have to handle too much
   # work on the public side.
 
-  # TODO: create system request_user with update_event_record permission
-  # [proxy user for public interface based requests]
   Endpoint.post('/plugins/aspace_requests/repositories/:repo_id/requests')
     .description("Create a request Event")
     .params(["request", String, "The request payload", :body => true],
             ["repo_id", :repo_id])
-    .permissions([])
+    .permissions(["update_event_record"])
     .returns([200, "(:event)"],
              [400, :error]) \
   do
@@ -27,7 +25,7 @@ class ArchivesSpaceService < Sinatra::Base
     .params(["refid", String, :refid],
             ["id", Integer, :id],
             ["repo_id", :repo_id])
-    .permissions([])
+    .permissions(["update_event_record"])
     .returns([200, "(:event)"]) \
   do
     refid = params[:refid]
