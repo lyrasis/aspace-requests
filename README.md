@@ -1,21 +1,23 @@
 # aspace-requests
 
-Implements (currently by overriding) public interface requests functionality.
+Extends requests functionality by creating request records in ArchivesSpace.
 
 ## Summary
 
 - Handle requests for materials as event records within ArchivesSpace.
 - Upon creating a request the requester is given a reference id.
 - The requester is given a chance to cancel the request (via a link).
-- An agent record is created for the requester with email for correspondence.
+- An agent record is created for the requester with links to their requests.
 - Requests can be searched for, viewed and processed by staff.
-- No emails =)
+- Emails are optional =)
 
 ## TODO
 
 - Add lookup request in public ui by reference id?
 - Add requests report to summarize requests scoped by date range.
 - Privacy option (scheduled anonymization or purge of request events not "pending")
+- Add event details to email (overriding mailer templates via plugin issue)
+- Cancel email confirmation?
 
 ## Setup
 
@@ -28,6 +30,12 @@ AppConfig[:pui_page_actions_request] = true
 # i.e. if the email address matches the pattern the request is allowed.
 # this is a spam mitigation strategy only. a simple example:
 AppConfig[:requester_email_validator] = /\A([\w+\-].?)+@archive.somewhere.edu$/i
+
+# optional: use with email, if use_repo_email is set then the repository must
+# have an email address for the request button to show in the public interface
+AppConfig[:pui_email_enabled] = true
+AppConfig[:pui_request_use_repo_email] = true
+# ... other email settings (c.f. documentation)
 ```
 
 ## EXAMPLES

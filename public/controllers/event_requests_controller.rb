@@ -38,6 +38,17 @@ ArchivesSpacePublic::Application.config.after_initialize do
         event  = client.create_request(path, @request.to_json) rescue nil
 
         if event
+          if AppConfig[:pui_email_enabled]
+            begin
+              # go ahead and send the email
+              RequestMailer.request_received_staff_email(@request).deliver
+              RequestMailer.request_received_email(@request).deliver
+            rescue Exception => ex
+              # for now just log email delivery errors in this context
+              $stderr.puts ex.message
+            end
+          end
+
           flash[:notice] = I18n.t(
             'request.submitted_html',
             refid: event["refid"],
