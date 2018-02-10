@@ -69,7 +69,7 @@ module Requests
     end
 
     def generate_refid
-      refid = SecureRandom.hex
+      refid = Time.now.to_i.to_s
       while Event[refid: refid]
         generate_refid
       end
