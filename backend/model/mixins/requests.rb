@@ -65,7 +65,7 @@ module Requests
 
     def find_agent_by_email(email_address)
       contact = AgentContact[email: email_address] # TODO: duplicate email?
-      contact ? AgentPerson.get_or_die(contact.id) : nil
+      contact ? AgentPerson.get_or_die(contact.agent_person_id) : nil
     end
 
     def generate_refid
