@@ -16,7 +16,6 @@ Extends requests functionality by creating request records in ArchivesSpace.
 - Add lookup request in public ui by reference id?
 - Add requests report to summarize requests scoped by date range.
 - Privacy option (scheduled anonymization or purge of request events not "pending")
-- Add event details to email (overriding mailer templates via plugin issue)
 - Cancel email confirmation?
 
 ## Setup

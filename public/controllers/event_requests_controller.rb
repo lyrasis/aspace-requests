@@ -18,7 +18,7 @@ ArchivesSpacePublic::Application.config.after_initialize do
       redirect_back(fallback_location: cancel_params[:context]) and return
     end
 
-    # send a request, retain RequestItem but no emails =)
+    # send a request, retain RequestItem but emails are optional
     def make_request
       @request = RequestItem.new(params)
       errs = @request.validate
@@ -41,6 +41,8 @@ ArchivesSpacePublic::Application.config.after_initialize do
           if AppConfig[:pui_email_enabled]
             begin
               # go ahead and send the email
+              add_event_refid_to_request_uri(event("refid"))
+              add_event_uri_to_note(event["uri"])
               RequestMailer.request_received_staff_email(@request).deliver
               RequestMailer.request_received_email(@request).deliver
             rescue Exception => ex
@@ -66,6 +68,18 @@ ArchivesSpacePublic::Application.config.after_initialize do
     end
 
     private
+
+    def add_event_refid_to_request_uri(refid)
+      @request.request_uri += " [REFERENCE NUMBER: #{refid}]"
+    end
+
+    def add_event_uri_to_note(uri)
+      if @request.note.nil? or @request.note.empty?
+        @request.note += "[REQUEST RECORD: #{uri}]"
+      else
+        @request.note += "\n[REQUEST RECORD: #{uri}]"
+      end
+    end
 
     def backend_cancel_path(event_uri)
       repo_id = event_uri.split("/")[2]
