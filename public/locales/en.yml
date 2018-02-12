@@ -3,6 +3,7 @@ en:
     cancellation_failure: "Cancellation failed."
     cancellation_success: "Your request has been cancelled."
     comment_not_appreciated: "Take your comment elsewhere!"
+    date: "Anticipated arrival date (YYYY-MM-DD)"
     email_invalid: "This email address is not permitted to make requests"
     failed: "Sorry, your request failed. Please try again soon or contact us for assistance."
     submitted_html: "Thank you, your request has been submitted. Your reference id is: %{refid}. Click here to %{cancel}."

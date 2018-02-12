@@ -7,16 +7,24 @@ module Requests
   module ClassMethods
 
     def create_request(request)
-      # TODO parse date
+      request_date, request_date_type = nil
+      begin
+        request_date      = DateTime.parse(request["date"]).to_s
+        request_date_type = "begin"
+      rescue ArgumentError
+        request_date      = request["date"]
+        request_date_type = "expression"
+      end
+
       event = {
         "refid"        => generate_refid,
         "event_type"   => "request",
         "outcome"      => "pending",
         "outcome_note" => request["note"],
         "date" => {
-          "date_type"  => "single",
-          "label"      => "usage",
-          "begin"      => request["date"]
+          "date_type"       => "single",
+          "label"           => "usage",
+          request_date_type => request_date
         },
         "linked_agents" => [{
           "role" => "requester",
