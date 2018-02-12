@@ -41,13 +41,13 @@ ArchivesSpacePublic::Application.config.after_initialize do
           if AppConfig[:pui_email_enabled]
             begin
               # go ahead and send the email
-              add_event_refid_to_request_uri(event("refid"))
+              add_event_refid_to_request_uri(event["refid"])
               add_event_uri_to_note(event["uri"])
               RequestMailer.request_received_staff_email(@request).deliver
               RequestMailer.request_received_email(@request).deliver
             rescue Exception => ex
               # for now just log email delivery errors in this context
-              $stderr.puts ex.message
+              $stderr.puts ex.backtrace
             end
           end
 
