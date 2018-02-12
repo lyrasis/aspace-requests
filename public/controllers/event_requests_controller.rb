@@ -41,7 +41,7 @@ ArchivesSpacePublic::Application.config.after_initialize do
           if AppConfig[:pui_email_enabled]
             begin
               # go ahead and send the email
-              add_event_refid_to_request_uri(event["refid"])
+              add_event_refid_to_title(event["refid"])
               add_event_uri_to_note(event["uri"])
               RequestMailer.request_received_staff_email(@request).deliver
               RequestMailer.request_received_email(@request).deliver
@@ -69,13 +69,13 @@ ArchivesSpacePublic::Application.config.after_initialize do
 
     private
 
-    def add_event_refid_to_request_uri(refid)
-      @request.request_uri += " [REFERENCE NUMBER: #{refid}]"
+    def add_event_refid_to_title(refid)
+      @request.title += " [REFERENCE NUMBER: #{refid}]"
     end
 
     def add_event_uri_to_note(uri)
       if @request.note.nil? or @request.note.empty?
-        @request.note += "[REQUEST RECORD: #{uri}]"
+        @request.note = "[REQUEST RECORD: #{uri}]"
       else
         @request.note += "\n[REQUEST RECORD: #{uri}]"
       end
