@@ -2,6 +2,7 @@ ArchivesSpacePublic::Application.config.after_initialize do
   RequestsController
   class RequestsController < ApplicationController
 
+    skip_before_action :verify_authenticity_token
     include PrefixHelper
 
     # cancel a request by refid
