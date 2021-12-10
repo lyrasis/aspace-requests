@@ -11,8 +11,8 @@ module Requests
       begin
         request_date      = DateTime.parse(request["date"]).to_s
         request_date_type = "begin"
-      rescue ArgumentError
-        request_date      = request["date"]
+      rescue StandardError
+        request_date      = "Invalid or no arrival date was provided"
         request_date_type = "expression"
       end
 

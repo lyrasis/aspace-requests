@@ -83,8 +83,22 @@ curl -H "X-ArchivesSpace-Session: $TOKEN" \
   http://localhost:4567/plugins/aspace_requests/repositories/2/requests/5?refid=123
 ```
 
+## Test config
+
+```ruby
+AppConfig[:plugins] << "aspace-requests"
+AppConfig[:request_user_secret] = "SOMETHING_SECRET"
+AppConfig[:pui_page_actions_request] = true
+AppConfig[:pui_email_enabled] = false
+AppConfig[:pui_request_use_repo_email] = false
+AppConfig[:pui_email_override] = 'testing@example.com'
+AppConfig[:pui_request_email_fallback_to_address] = 'testing@example.com'
+AppConfig[:pui_request_email_fallback_from_address] = 'testing@example.com'
+AppConfig[:pui_email_perform_deliveries] = false
+```
+
 ## Compatibility
 
-- v2.3.0
+- v2.3.0+
 
 ---
